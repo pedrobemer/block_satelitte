@@ -16,7 +16,8 @@ def update_phi_error_str(phi_error):
 
 
 #Global Variables
-filename = "ex1_damp_0_5.txt"
+damp_factor = "0.7"
+filename = "ex1_damp_"+damp_factor+".txt"
 phi_error_data = []
 phi_error_preamble = []
 phi_error_pilot = []
@@ -64,7 +65,24 @@ for line in f:
         phi_error_data.append(float(phi_error))
         # print(phi_error_data)
         
-a = len(phi_error_pilot)
-print(a)
-print(phi_error_pilot[a-1])
-
+pilot_len = len(phi_error_pilot)
+preamble_len = len(phi_error_preamble)
+data_len = len(phi_error_data)
+# print(a)
+# print(phi_error_pilot[a-1])
+plt.figure(1)
+plt.plot(range(pilot_len), phi_error_pilot)
+plt.xlabel("Samples")
+plt.ylabel("Phase Error (radians)")
+plt.title("Phase Error for the Pilot Symbols with Damping Factor of " + damp_factor)
+plt.figure(2)
+plt.plot(range(preamble_len), phi_error_preamble)
+plt.xlabel("Samples")
+plt.ylabel("Phase Error (radians)")
+plt.title("Phase Error for the Preamble Symbols with Damping Factor of " + damp_factor)
+plt.figure(3)
+plt.plot(range(data_len), phi_error_data)
+plt.xlabel("Samples")
+plt.ylabel("Phase Error (radians)")
+plt.title("Phase Error for the Payload Symbols with Damping Factor of " + damp_factor)
+plt.show()
