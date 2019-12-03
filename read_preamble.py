@@ -43,6 +43,8 @@ for line in f:
         preamble_imag = update_to_float_format(preamble_imag)
         mag_rec_preamble = math.sqrt(preamble_real**2 + preamble_imag**2)
         phase_rec_preamble = math.atan2(preamble_imag, preamble_real)
+        phase_tx_preamble = math.atan2(0,preamble[k])
+        phase_error = phase_tx_preamble - phase_rec_preamble
         noise_real = preamble[k] - preamble_real
         noise_imag = 0 - preamble_imag
         mag_noise = math.sqrt(noise_real**2 + noise_imag**2)
@@ -52,6 +54,8 @@ for line in f:
         snr_watts = power_rec_preamble/power_noise
         print(preamble_real," + ",preamble_imag,"j")
         print("Received Phase:",phase_rec_preamble)
+        print("Tranmitted Phase:", phase_tx_preamble)
+        print("Phase Error:", phase_error)
         print("Received Magnitude:", mag_rec_preamble)
         print("Power Received Preamble(in Watts):", power_rec_preamble)
         print("Power Noise(in Watts):", power_noise)
